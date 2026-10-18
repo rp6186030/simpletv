@@ -15,6 +15,16 @@
 
     <!-- Apps never shown as tiles (e.g. the Live TV app, which the Inputs menu already covers). -->
     <string-array name="hidden_apps">
+        <item>com.tcl.dashboard</item>
+        <item>com.tcl.exhibit</item>
+        <item>com.tcl.guard</item>
+        <item>com.tcl.ocean.instructions</item>
+        <item>com.tcl.smartalexa</item>
+        <item>com.tcl.suspension</item>
+        <item>com.tcl.tv.plus</item>
+        <item>com.tcl.ui_mediaCenter</item>
+        <item>com.tcl.browser</item>
+        <item>com.tcl.tv</item>
     </string-array>
 
     <!-- The TV's Live TV / tuner app, offered at the end of the Inputs menu. Leave empty to omit. -->

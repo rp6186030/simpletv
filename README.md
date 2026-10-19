@@ -395,6 +395,7 @@ Use simple remote paths without spaces or shell metacharacters: the upload helpe
 | Gradle cannot resolve dependencies | First builds need repository access. Offline builds need a cached distribution and dependencies. |
 | APK signature mismatch | The installed app must use the same signing key. Keeping the package ID means a differently signed build cannot update it in place. |
 | Home opens stock or a factory app | Verify successful installation and repeat the HOME selection command in [Install and select Home](#4-install-and-select-home). Do not disable stock HOME before verifying. |
+| Stock HOME disabled but Home opens a setup or recovery screen | Some Google TV firmware, such as the TCL G10 example, falls back to `com.google.android.tungsten.setupwraith/.RecoveryActivity`. Disable `com.google.android.tungsten.setupwraith` as well, then recheck Home; the shell cannot disable that one activity alone. Re-enable it with `pm enable` before a factory reset or remote re-pairing. See the [TCL example](examples/tcl-g10-google-tv/debloat.txt). |
 | Windows restore cannot select HOME | Use the full recorded component as described in [restoration](#debloating-and-restoration). |
 | Wi-Fi name missing | Check location permission and device location settings; the UI falls back to connection status. |
 | Missing app tile | Check `hidden_apps`, enabled state and whether the app exposes a Leanback launcher activity. |

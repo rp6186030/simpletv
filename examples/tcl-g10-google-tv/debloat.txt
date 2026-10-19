@@ -18,6 +18,24 @@
 #   tools/tv.py 'settings put secure screensaver_components com.android.dreams.basic/.Colors'
 # - screencap writes an empty file while Live TV/HDMI is on screen. Press Home first.
 # - The Google TV promo banner is drawn by launcherx itself, so only launcher/ removes it.
+# - Making Claude TV the Home screen needs TWO packages disabled, not only launcherx. Observed on
+#   this firmware (STT2.230203.001, retested on a TCL G10 in 2026): with only launcherx disabled the
+#   Home key opens com.google.android.tungsten.setupwraith/.RecoveryActivity instead, even though
+#   Claude TV holds the HOME role and set-home-activity returned Success. Re-running set-home-activity
+#   did not help, and the shell cannot disable RecoveryActivity alone (SecurityException).
+#   Disabling both packages (one pm call each) made Home and the Home key open Claude TV and it
+#   survived a reboot:
+#     tools/tv.py 'pm disable-user --user 0 com.google.android.apps.tv.launcherx'
+#     tools/tv.py 'pm disable-user --user 0 com.google.android.tungsten.setupwraith'
+#   setupwraith is the Google TV setup wizard (guest reset, add account, remote re-pairing). Neither
+#   package is in this list, so restore.sh does not re-enable setupwraith: undo it by hand with
+#     tools/tv.py 'pm enable com.google.android.tungsten.setupwraith'
+#   Re-enable it before a factory reset or pairing a new remote. Expect the YouTube remote button
+#   to stop working. Try launcherx alone first if you prefer; if Home opens a recovery screen,
+#   re-enable launcherx at once (pm enable) and use both. One TV dropped off Wi-Fi right after the
+#   second disable and was reconnected by hand; the cause was not established. Disable these only
+#   after confirming Claude TV launches (am start -n com.gathin.tvhome/.MainActivity). A system
+#   update may re-enable them, so check that Home still opens Claude TV afterwards.
 
 # TCL content, ads and promos
 com.tcl.tv.plus                        # TCL TV+ content app

@@ -30,8 +30,9 @@
 #   setupwraith is the Google TV setup wizard (guest reset, add account, remote re-pairing). Neither
 #   package is in this list, so restore.sh does not re-enable setupwraith: undo it by hand with
 #     tools/tv.py 'pm enable com.google.android.tungsten.setupwraith'
-#   Re-enable it before a factory reset or pairing a new remote. Expect the YouTube remote button
-#   to stop working. Try launcherx alone first if you prefer; if Home opens a recovery screen,
+#   Re-enable it before a factory reset or pairing a new remote. Reports for other Google TV devices
+#   say the YouTube remote button may stop working once the stock launcher is disabled; on this
+#   TCL G10 it still opened YouTube. Try launcherx alone first if you prefer; if Home opens a recovery screen,
 #   re-enable launcherx at once (pm enable) and use both. One TV dropped off Wi-Fi right after the
 #   second disable and was reconnected by hand; the cause was not established. Disable these only
 #   after confirming Claude TV launches (am start -n com.gathin.tvhome/.MainActivity). A system
